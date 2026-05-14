@@ -11,8 +11,6 @@ import { KeyboardProvider } from "react-native-keyboard-controller"
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
 
-import { AppStateProvider } from "./context/AppStateContext"
-import { PurchasesProvider } from "./context/PurchasesContext"
 import { initI18n } from "./i18n"
 import { AppNavigator } from "./navigators/AppNavigator"
 import { useNavigationPersistence } from "./navigators/navigationUtilities"
@@ -29,11 +27,8 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 const prefix = Linking.createURL("/")
 const config = {
   screens: {
-    Main: {
-      screens: {
-        Home: { path: "" },
-      },
-    },
+    Home: { path: "" },
+    Settings: { path: "settings" },
   },
 }
 
@@ -61,17 +56,13 @@ export function App() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider initialMetrics={initialWindowMetrics}>
         <KeyboardProvider>
-          <AppStateProvider>
-            <PurchasesProvider>
-              <ThemeProvider initialContext="light">
-                <AppNavigator
-                  linking={{ prefixes: [prefix], config }}
-                  initialState={initialNavigationState}
-                  onStateChange={onNavigationStateChange}
-                />
-              </ThemeProvider>
-            </PurchasesProvider>
-          </AppStateProvider>
+          <ThemeProvider initialContext="light">
+            <AppNavigator
+              linking={{ prefixes: [prefix], config }}
+              initialState={initialNavigationState}
+              onStateChange={onNavigationStateChange}
+            />
+          </ThemeProvider>
         </KeyboardProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>

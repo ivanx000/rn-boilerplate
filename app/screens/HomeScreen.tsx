@@ -3,7 +3,7 @@ import { Cog6ToothIcon } from "react-native-heroicons/outline"
 
 import { Screen } from "@/components/Screen"
 import { Text } from "@/components/Text"
-import { BoilerplateConfig } from "@/config/boilerplate.config"
+import { AppInfo } from "@/config/appInfo"
 import type { MainStackScreenProps } from "@/navigators/navigationTypes"
 import { useAppTheme } from "@/theme/context"
 
@@ -15,7 +15,7 @@ export function HomeScreen({ navigation }: MainStackScreenProps<"Home">) {
       <View style={[$root, { paddingHorizontal: spacing.md, paddingTop: spacing.sm }]}>
         {/* Header */}
         <View style={$header}>
-          <Text style={[$title, { color: colors.text }]}>{BoilerplateConfig.app.name}</Text>
+          <Text style={[$title, { color: colors.text }]}>{AppInfo.app.name}</Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("Settings")}
             activeOpacity={0.7}
@@ -25,11 +25,9 @@ export function HomeScreen({ navigation }: MainStackScreenProps<"Home">) {
           </TouchableOpacity>
         </View>
 
-        {/* Placeholder content — replace with your app's dashboard */}
-        <View style={[$placeholder, { backgroundColor: colors.card, borderColor: colors.border }]}>
-          <Text style={[$placeholderText, { color: colors.textDim }]}>
-            Your dashboard goes here
-          </Text>
+        <View style={[$hero, { backgroundColor: colors.card, borderColor: colors.border }]}> 
+          <Text style={[$heroTitle, { color: colors.text }]}>A clean starting point for your app.</Text>
+          <Text style={[$heroBody, { color: colors.textDim }]}>Replace this screen with your main experience and keep the rest of the starter only if you need it.</Text>
         </View>
       </View>
     </Screen>
@@ -54,15 +52,22 @@ const $title: TextStyle = {
   lineHeight: 36,
 }
 
-const $placeholder: ViewStyle = {
+const $hero: ViewStyle = {
   flex: 1,
   borderRadius: 16,
   borderWidth: 1,
-  borderStyle: "dashed",
-  alignItems: "center",
+  padding: 20,
   justifyContent: "center",
+  gap: 12,
 }
 
-const $placeholderText: TextStyle = {
-  fontSize: 15,
+const $heroTitle: TextStyle = {
+  fontSize: 24,
+  lineHeight: 32,
+  fontWeight: "700",
+}
+
+const $heroBody: TextStyle = {
+  fontSize: 16,
+  lineHeight: 24,
 }

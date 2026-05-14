@@ -1,38 +1,15 @@
-import { Alert, Linking, StyleSheet, TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
+import { Linking, StyleSheet, TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
 import * as Application from "expo-application"
 import { ChevronRightIcon } from "react-native-heroicons/outline"
 
 import { Screen } from "@/components/Screen"
 import { Text } from "@/components/Text"
-import { BoilerplateConfig } from "@/config/boilerplate.config"
-import { usePurchases } from "@/context/PurchasesContext"
+import { AppInfo } from "@/config/appInfo"
 import type { MainStackScreenProps } from "@/navigators/navigationTypes"
 import { useAppTheme } from "@/theme/context"
 
 export function SettingsScreen({ navigation }: MainStackScreenProps<"Settings">) {
   const { theme: { colors, spacing } } = useAppTheme()
-  const { isPremium, restorePurchases, customerInfo } = usePurchases()
-
-  const handleRestore = async () => {
-    const success = await restorePurchases()
-    if (success) {
-      Alert.alert("Restored", "Your subscription has been restored.")
-    } else {
-      Alert.alert("Nothing to restore", "No active subscription found for this Apple ID.")
-    }
-  }
-
-  const handleManageSubscription = () => {
-    Linking.openURL("https://apps.apple.com/account/subscriptions")
-  }
-
-  const subscriptionStatus = () => {
-    if (!customerInfo) return "Loading…"
-    const entitlement = customerInfo.entitlements.active[BoilerplateConfig.revenueCat.entitlementName]
-    if (!entitlement) return "Free"
-    const exp = entitlement.expirationDate
-    return exp ? `Renews ${new Date(exp).toLocaleDateString()}` : "Active"
-  }
 
   const appVersion = Application.nativeApplicationVersion ?? "—"
   const buildVersion = Application.nativeBuildVersion ?? "—"
@@ -48,80 +25,30 @@ export function SettingsScreen({ navigation }: MainStackScreenProps<"Settings">)
           <Text style={[$heading, { color: colors.text }]}>Settings</Text>
         </View>
 
-        {/* Subscription */}
-        <View style={$section}>
-          <Text style={[$sectionLabel, { color: colors.textDim }]}>SUBSCRIPTION</Text>
-          <View style={[$card, { backgroundColor: colors.card }]}>
-            <SettingsRow
-              label="Plan"
-              value={isPremium ? "Premium" : "Free"}
-              colors={colors}
-            />
-            {isPremium ? (
-              <>
-                <SettingsRow
-                  label="Status"
-                  value={subscriptionStatus()}
-                  colors={colors}
-                />
-                <SettingsRow
-                  label="Manage subscription"
-                  onPress={handleManageSubscription}
-                  chevron
-                  colors={colors}
-                  last
-                />
-              </>
-            ) : (
-              <SettingsRow
-                label="Restore purchases"
-                onPress={handleRestore}
-                chevron
-                colors={colors}
-                last
-              />
-            )}
-          </View>
-          {isPremium && (
-            <TouchableOpacity onPress={handleRestore} activeOpacity={0.7} style={$restoreLink}>
-              <Text style={[$restoreLinkText, { color: colors.textDim }]}>Restore purchases</Text>
-            </TouchableOpacity>
-          )}
-        </View>
-
-        {/* Legal */}
-        <View style={$section}>
-          <Text style={[$sectionLabel, { color: colors.textDim }]}>LEGAL</Text>
-          <View style={[$card, { backgroundColor: colors.card }]}>
-            <SettingsRow
-              label="Privacy Policy"
-              onPress={() => navigation.navigate("Legal", { type: "privacy" })}
-              chevron
-              colors={colors}
-            />
-            <SettingsRow
-              label="Terms of Service"
-              onPress={() => navigation.navigate("Legal", { type: "terms" })}
-              chevron
-              colors={colors}
-              last
-            />
-          </View>
-        </View>
-
-        {/* About */}
         <View style={$section}>
           <Text style={[$sectionLabel, { color: colors.textDim }]}>ABOUT</Text>
           <View style={[$card, { backgroundColor: colors.card }]}>
             <SettingsRow
-              label="Contact support"
-              onPress={() => Linking.openURL(`mailto:${BoilerplateConfig.app.supportEmail}`)}
-              chevron
+              label="App name"
+              value={AppInfo.app.name}
               colors={colors}
             />
             <SettingsRow
-              label="Version"
-              value={`${appVersion} (${buildVersion})`}
+              label="Support"
+              onPress={() => Linking.openURL(`mailto:${AppInfo.app.supportEmail}`)}
+              chevron
+              colors={colors}
+            />
+            <SettingsRow label="Version" value={`${appVersion} (${buildVersion})`} colors={colors} last />
+          </View>
+        </View>
+
+        <View style={$section}>
+          <Text style={[$sectionLabel, { color: colors.textDim }]}>NOTES</Text>
+          <View style={[$card, { backgroundColor: colors.card }]}>
+            <SettingsRow
+              label="What to customize"
+              value="Home, settings, theme, and i18n are ready to extend."
               colors={colors}
               last
             />
@@ -231,11 +158,3 @@ const $rowValue: TextStyle = {
   fontSize: 14,
 }
 
-const $restoreLink: ViewStyle = {
-  alignSelf: "center",
-  paddingVertical: 4,
-}
-
-const $restoreLinkText: TextStyle = {
-  fontSize: 13,
-}

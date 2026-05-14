@@ -1,11 +1,11 @@
 # React Native Boilerplate
 
-A modern React Native starter template built with Expo, TypeScript, and best practices. Includes pre-built screens, theme system, i18n support, state management setup, and EAS build configuration.
+A modern React Native starter template built with Expo, TypeScript, and best practices. It gives you a clean app shell, theme system, i18n support, state management setup, and EAS build configuration.
 
 ## What's Included
 
 This boilerplate comes with:
-- Pre-built generic screens (Home, Onboarding, Paywall, Settings, Legal, Error)
+- Generic starter screens for Home, Settings, and Error
 - Reusable UI component library
 - Light and dark theme system with custom colors and typography
 - Multi-language i18n setup (EN, ES, FR, AR, HI, JA, KO)
@@ -20,13 +20,12 @@ This boilerplate comes with:
 | Category | Libraries |
 |---|---|
 | Framework | React Native 0.83.4, Expo 55, TypeScript 5.9 |
-| Navigation | React Navigation 7 (native-stack, bottom-tabs) |
+| Navigation | React Navigation 7 (native-stack) |
 | State | React Context API + MMKV persistent storage |
 | UI | react-native-reanimated, react-native-gesture-handler, react-native-heroicons |
 | Fonts | Space Grotesk via `@expo-google-fonts/space-grotesk` |
 | Networking | apisauce |
 | i18n | i18next + react-i18next (EN, ES, FR, AR, HI, JA, KO) |
-| Notifications | expo-notifications |
 | Debugging | Reactotron + MMKV plugin |
 | Testing | Jest, Maestro (E2E) |
 | Build | EAS (Expo Application Services) |
@@ -37,7 +36,7 @@ This boilerplate comes with:
 
 ```
 app/
-├── screens/          # Pre-built screens (Home, Onboarding, Paywall, Settings, Legal, Error)
+├── screens/          # Starter screens (Home, Settings, Error)
 ├── context/          # Global state management (AppStateContext, etc.)
 ├── navigators/       # Navigation setup (App, Main navigators + types)
 ├── components/       # Reusable UI component library
@@ -59,10 +58,7 @@ assets/
 | Screen | Description |
 |---|---|
 | **Home** | Main entry point — customize with your app's primary content |
-| **Onboarding** | User introduction flow — ready to adapt for your setup/tutorial needs |
-| **Paywall** | Monetization screen — template for subscription or premium features |
-| **Settings** | Settings and user preferences — theme toggle, language selection, etc. |
-| **Legal** | Terms and privacy — static content screens |
+| **Settings** | Settings and user preferences — a generic place for support, version, and app options |
 | **Error** | Error boundary screen — handles crashes gracefully |
 
 ## State Management
@@ -118,6 +114,7 @@ Customize colors, fonts, and spacing in the theme files to match your brand.
 | File | Purpose |
 |---|---|
 | `app/config/config.base.ts` | Base config (nav persistence, error catching, exit routes) |
+| `app/config/appInfo.ts` | App name and support email placeholders |
 | `app/config/config.dev.ts` | Dev API base URL and settings |
 | `app/config/config.prod.ts` | Production API base URL and settings |
 | `app.json` | Expo app config (name, bundle IDs, icons, plugins) |
