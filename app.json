@@ -1,11 +1,11 @@
 {
-  "name": "Boilerplate App",
-  "slug": "rn-boilerplate",
-  "scheme": "rn-boilerplate",
+  "name": "Your App",
+  "slug": "your-app-slug",
+  "scheme": "your-app-scheme",
   "version": "1.0.0",
   "orientation": "portrait",
   "userInterfaceStyle": "light",
-  "icon": "./assets/icon.png",
+  "icon": "./assets/images/app-icon.png",
   "updates": {
     "fallbackToCacheTimeout": 0
   },
@@ -15,22 +15,22 @@
     "**/*"
   ],
   "android": {
-    "icon": "./assets/icon.png",
-    "package": "com.example.rnboilerplate",
+    "icon": "./assets/images/app-icon.png",
+    "package": "com.yourcompany.yourapp",
     "adaptiveIcon": {
-      "foregroundImage": "./assets/icon.png",
-      "backgroundImage": "./assets/images/app-icon-android-adaptive-background.png"
+      "foregroundImage": "./assets/images/app-icon-android-foreground.png",
+      "backgroundColor": "#ffffff"
     },
     "allowBackup": false,
     "edgeToEdgeEnabled": true
   },
   "ios": {
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/app-icon.png",
     "supportsTablet": true,
-    "bundleIdentifier": "com.example.rnboilerplate"
+    "bundleIdentifier": "com.yourcompany.yourapp"
   },
   "web": {
-    "favicon": "./assets/icon.png",
+    "favicon": "./assets/images/favicon.png",
     "bundler": "metro"
   },
   "plugins": [
@@ -39,7 +39,7 @@
     [
       "expo-splash-screen",
       {
-        "image": "./assets/icon.png",
+        "image": "./assets/images/app-icon.png",
         "imageWidth": 300,
         "resizeMode": "contain",
         "backgroundColor": "#ffffff"
