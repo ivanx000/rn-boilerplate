@@ -1,0 +1,14 @@
+appId: ${MAESTRO_APP_ID}
+onFlowStart:
+  - runFlow: ../shared/_OnFlowStart.yaml
+---
+# Home screen is visible on launch
+- assertVisible: "Home Screen"
+
+# Navigate to Settings tab
+- tapOn: "Settings"
+- assertVisible: "Settings"
+
+# Navigate back to Home tab
+- tapOn: "Home"
+- assertVisible: "Home Screen"

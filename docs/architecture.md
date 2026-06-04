@@ -107,12 +107,62 @@ Both read from the `API_BASE_URL` environment variable with a fallback default.
 
 ---
 
+## State Management
+
+`app/stores/` contains Zustand stores. `useAppStore.ts` is a minimal example — replace or extend it for your domain.
+
+```ts
+import { useAppStore } from "@/stores/useAppStore"
+
+const count = useAppStore((s) => s.count)
+const increment = useAppStore((s) => s.increment)
+```
+
+For larger apps, split state into focused stores (e.g. `useAuthStore`, `useSettingsStore`) rather than growing one store.
+
+---
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and fill in values. The only variable wired up out of the box is:
+
+| Variable | Used in |
+|----------|---------|
+| `API_BASE_URL` | `app/config/config.dev.ts`, `config.prod.ts` |
+
+Variables are inlined at build time via `babel-plugin-transform-inline-environment-variables`. Never put secrets in `.env` — they end up in the JS bundle.
+
+---
+
+## Git Hooks
+
+Husky runs `lint-staged` on every commit. lint-staged runs ESLint with auto-fix on all staged `.ts` / `.tsx` files. This keeps the diff clean without running the full lint suite on every save.
+
+The pre-commit hook is at `.husky/pre-commit`. To skip it in an emergency: `git commit --no-verify`.
+
+---
+
+## CI (pipeline.yaml)
+
+`pipeline.yaml` defines three stages for the local `pipeline` runner:
+
+| Stage | Command |
+|-------|---------|
+| Type Check | `npm run compile` |
+| Lint | `npm run lint:check` |
+| Test | `npm test` |
+
+Run with `pipeline` from the project root.
+
+---
+
 ## Adding a Feature
 
 A typical feature touches:
 
 ```
 app/models/types.ts          ← add domain types
+app/stores/                  ← add or extend Zustand store
 app/services/api/            ← add API calls
 app/screens/YourScreen.tsx   ← add screen
 app/navigators/              ← register screen

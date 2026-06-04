@@ -1,0 +1,10 @@
+project: "rn-boilerplate"
+stages:
+  - name: "Type Check"
+    run: "npm run compile"
+
+  - name: "Lint"
+    run: "npm run lint:check"
+
+  - name: "Test"
+    run: "npm test"
