@@ -20,7 +20,7 @@ export interface ErrorDetailsProps {
  * @returns {JSX.Element} The rendered `ErrorDetails` component.
  */
 export function ErrorDetails(props: ErrorDetailsProps) {
-  const { themed } = useAppTheme()
+  const { themed, theme: { colors } } = useAppTheme()
   return (
     <Screen
       preset="fixed"
@@ -28,7 +28,7 @@ export function ErrorDetails(props: ErrorDetailsProps) {
       contentContainerStyle={themed($contentContainer)}
     >
       <View style={$topSection}>
-        <ExclamationTriangleIcon size={64} color="#EF4444" strokeWidth={1.5} />
+        <ExclamationTriangleIcon size={64} color={colors.error} strokeWidth={1.5} />
         <Text style={themed($heading)} preset="subheading" tx="errorScreen:title" />
         <Text tx="errorScreen:friendlySubtitle" />
       </View>

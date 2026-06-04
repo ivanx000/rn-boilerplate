@@ -1,26 +1,30 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
 import { HomeScreen } from "@/screens/HomeScreen"
 import { SettingsScreen } from "@/screens/SettingsScreen"
 import { useAppTheme } from "@/theme/context"
 
-import type { MainStackParamList } from "./navigationTypes"
+import type { MainTabParamList } from "./navigationTypes"
 
-const Stack = createNativeStackNavigator<MainStackParamList>()
+const Tab = createBottomTabNavigator<MainTabParamList>()
 
 export function MainNavigator() {
   const { theme: { colors } } = useAppTheme()
 
   return (
-    <Stack.Navigator
+    <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: colors.background },
+        tabBarActiveTintColor: colors.text,
+        tabBarInactiveTintColor: colors.textDim,
+        tabBarStyle: {
+          backgroundColor: colors.background,
+          borderTopColor: colors.border,
+        },
       }}
-      initialRouteName="Home"
     >
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Settings" component={SettingsScreen} />
-    </Stack.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+    </Tab.Navigator>
   )
 }

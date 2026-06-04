@@ -1,16 +1,16 @@
 import { ComponentProps } from "react"
 import { NavigationContainer } from "@react-navigation/native"
-import { NativeStackScreenProps } from "@react-navigation/native-stack"
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
 
-export type MainStackParamList = {
+export type MainTabParamList = {
   Home: undefined
   Settings: undefined
 }
 
-export type MainStackScreenProps<T extends keyof MainStackParamList> = NativeStackScreenProps<
-  MainStackParamList,
+export type MainTabScreenProps<T extends keyof MainTabParamList> = BottomTabScreenProps<
+  MainTabParamList,
   T
 >
 
 export interface NavigationProps
-  extends Partial<ComponentProps<typeof NavigationContainer<MainStackParamList>>> {}
+  extends Partial<ComponentProps<typeof NavigationContainer<MainTabParamList>>> {}
