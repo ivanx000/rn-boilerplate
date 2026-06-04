@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run start:*)",
+      "Bash(npm run ios:*)",
+      "Bash(npm run android:*)",
+      "Bash(npm run compile:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run lint:check:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run prebuild:clean:*)",
+      "Bash(npm run align-deps:*)",
+      "Bash(npx expo:*)",
+      "Bash(npx tsc:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git status:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)"
+    ]
+  }
+}
