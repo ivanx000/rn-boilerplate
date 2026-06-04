@@ -20,7 +20,7 @@ This boilerplate comes with:
 | Category | Libraries |
 |---|---|
 | Framework | React Native 0.83.4, Expo 55, TypeScript 5.9 |
-| Navigation | React Navigation 7 (native-stack) |
+| Navigation | React Navigation 7 (native-stack, bottom-tabs) |
 | State | React Context API + MMKV persistent storage |
 | UI | react-native-reanimated, react-native-gesture-handler, react-native-heroicons |
 | Fonts | Space Grotesk via `@expo-google-fonts/space-grotesk` |
@@ -51,6 +51,8 @@ app/
 assets/
 ├── icons/
 └── images/
+docs/
+└── architecture.md   # folder structure, theme, navigation, i18n patterns
 ```
 
 ## Included Screens
@@ -68,7 +70,7 @@ The boilerplate uses React Context API for global state with MMKV for persistent
 ## Getting Started
 
 ```bash
-npm install --legacy-peer-deps
+npm install
 npm run start
 ```
 
