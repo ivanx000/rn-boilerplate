@@ -14,15 +14,15 @@ const palette = {
   warmDanger:       '#C0392B',
   warmDangerBg:     '#FDF1F0',
 
-  // Goal accent colors — each blocked app gets one
-  goalTeal:   "#00C9A7",
-  goalPurple: "#8B5CF6",
-  goalCoral:  "#FF6B6B",
-  goalOrange: "#FF9F43",
-  goalBlue:   "#4ECDC4",
-  goalGreen:  "#6BCB77",
-  goalPink:   "#FF85A1",
-  goalYellow: "#FFD93D",
+  // Accent colors
+  accent1: "#00C9A7",
+  accent2: "#8B5CF6",
+  accent3: "#FF6B6B",
+  accent4: "#FF9F43",
+  accent5: "#4ECDC4",
+  accent6: "#6BCB77",
+  accent7: "#FF85A1",
+  accent8: "#FFD93D",
 
   // Legacy keys kept for built-in components
   secondary500: "#41476E",
@@ -35,18 +35,18 @@ const palette = {
   overlay50: "rgba(0, 0, 0, 0.5)",
 } as const
 
-export const GOAL_ACCENT_COLORS = [
-  palette.goalTeal,
-  palette.goalPurple,
-  palette.goalCoral,
-  palette.goalOrange,
-  palette.goalBlue,
-  palette.goalGreen,
-  palette.goalPink,
-  palette.goalYellow,
+export const ACCENT_COLORS = [
+  palette.accent1,
+  palette.accent2,
+  palette.accent3,
+  palette.accent4,
+  palette.accent5,
+  palette.accent6,
+  palette.accent7,
+  palette.accent8,
 ] as const
 
-export type GoalAccentColor = (typeof GOAL_ACCENT_COLORS)[number]
+export type AccentColor = (typeof ACCENT_COLORS)[number]
 
 export const colors = {
   palette,
