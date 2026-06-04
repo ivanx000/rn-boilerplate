@@ -9,8 +9,11 @@ This boilerplate comes with:
 - Reusable UI component library
 - Light and dark theme system with custom colors and typography
 - Multi-language i18n setup (EN, ES, FR, AR, HI, JA, KO)
-- State management with React Context API and MMKV persistent storage
-- Navigation setup with React Navigation (native-stack, bottom-tabs)
+- State management with Zustand and MMKV persistent storage
+- Navigation setup with React Navigation (bottom-tabs)
+- Environment variable setup with `.env.example`
+- Pre-commit linting via Husky + lint-staged
+- Local CI pipeline (typecheck, lint, test)
 - Dev and production configuration management
 - Debugging and testing infrastructure
 - EAS build profiles for iOS and Android
@@ -21,7 +24,7 @@ This boilerplate comes with:
 |---|---|
 | Framework | React Native 0.83.4, Expo 55, TypeScript 5.9 |
 | Navigation | React Navigation 7 (native-stack, bottom-tabs) |
-| State | React Context API + MMKV persistent storage |
+| State | Zustand + MMKV persistent storage |
 | UI | react-native-reanimated, react-native-gesture-handler, react-native-heroicons |
 | Fonts | Space Grotesk via `@expo-google-fonts/space-grotesk` |
 | Networking | apisauce |
@@ -29,6 +32,8 @@ This boilerplate comes with:
 | Debugging | Reactotron + MMKV plugin |
 | Testing | Jest, Maestro (E2E) |
 | Build | EAS (Expo Application Services) |
+| Git hooks | Husky + lint-staged |
+| CI | pipeline.yaml (local runner) |
 
 **JS Engine:** Hermes — **New Architecture:** Enabled
 
@@ -37,12 +42,13 @@ This boilerplate comes with:
 ```
 app/
 ├── screens/          # Starter screens (Home, Settings, Error)
-├── context/          # Global state management (AppStateContext, etc.)
+├── stores/           # Zustand stores (useAppStore as example)
+├── context/          # React context providers (add yours here)
 ├── navigators/       # Navigation setup (App, Main navigators + types)
 ├── components/       # Reusable UI component library
 ├── theme/            # Colors, typography, spacing, dark/light theme system
 ├── hooks/            # Shared hooks for common patterns
-├── models/           # TypeScript type definitions
+├── models/           # TypeScript type definitions (define yours here)
 ├── services/api/     # apisauce API client + error handling
 ├── utils/            # Storage (MMKV wrapper), helpers, formatters
 ├── i18n/             # Translation files per language
@@ -65,12 +71,15 @@ docs/
 
 ## State Management
 
-The boilerplate uses React Context API for global state with MMKV for persistent local storage. Define your data models and contexts in `app/models/` and `app/context/` — no backend required unless you add one.
+Global state uses [Zustand](https://github.com/pmndrs/zustand). `app/stores/useAppStore.ts` is a minimal example store — replace or extend it for your domain. For larger apps, split into focused stores (e.g. `useAuthStore`, `useSettingsStore`).
+
+MMKV (`app/utils/storage/`) handles persistent local storage separately.
 
 ## Getting Started
 
 ```bash
 npm install
+cp .env.example .env   # set API_BASE_URL and any other vars
 npm run start
 ```
 
@@ -103,6 +112,7 @@ npm run test:watch      # Jest in watch mode
 npm run test:maestro    # Maestro E2E tests
 npm run depcruise:graph # Generate dependency graph SVG
 npm run adb             # Android reverse port forwarding (dev)
+pipeline                # Run full CI locally (typecheck → lint → test)
 ```
 
 ## Theme System
